@@ -13,7 +13,6 @@ public:
     channels=1;
     resolution=8;
     samplerate=22050;
-    duration=4;
   }
   void setter_channels(int chan)
   {
@@ -65,16 +64,17 @@ public:
   {
      return samplerate;
   }
-  int datasize()
+  int datasize(int dura)
   {
     int bytes;
+    duration=dura;
     bytes=duration*channels*(resolution/8)*samplerate;
     return bytes;
   }
 };
 int main(int argc, char const *argv[])
 {
-  int c,r,s;
+  int c,r,s,dura;
   Audioclip obj;
   cout<<"channels input"<<endl;
   cin>>c;
@@ -82,13 +82,15 @@ int main(int argc, char const *argv[])
   cin>>r;
   cout<<"samplerate input"<<endl;
   cin>>s;
+  cout<<"duration input"<<endl;
+  cin>>dura;
   obj.setter_channels(c);
-  cout<<obj.getter_channels()<<endl;
+  cout<<"channels output = "<<obj.getter_channels()<<endl;
   obj.setter_resolution(r);
-  cout<<obj.getter_resolution()<<endl;
+  cout<<"resolution output = "<<obj.getter_resolution()<<endl;
   obj.setter_samplerate(s);
-  cout<<obj.getter_samplerate()<<endl;
+  cout<<"samplerate output = "<<obj.getter_samplerate()<<endl;
   cout<<"Maximum quality = "<<obj.studioquality()<<endl;
-  cout<<"number of bytes = "<<obj.datasize();
+  cout<<"number of bytes = "<<obj.datasize(dura);
   return 0;
 }
